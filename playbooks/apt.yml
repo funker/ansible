@@ -1,0 +1,7 @@
+- hosts: '*'
+  become: 'yes'
+  tasks:
+    - name: 'Apt update and Apt upgrade'
+      apt:
+        update_cache: 'yes'
+        upgrade: 'yes'

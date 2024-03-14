@@ -1,0 +1,40 @@
+- name: install dotfiles
+  hosts: [Test]
+  tasks:
+    - name: Install git
+      ansible.builtin.apt:
+        name: stow
+        state: present
+        update_cache: true
+      become: yes
+    - name: Install stow
+      ansible.builtin.apt:
+        name: stow
+        state: present
+        update_cache: true
+      become: yes
+    - name: Install neofetch
+      ansible.builtin.apt:
+        name: stow
+        state: present
+        update_cache: true
+      become: yes
+    - name: Clone the dotfiles Github repository
+      ansible.builtin.git:
+        repo: https://github.com/funker/dotfiles.git
+        dest: /home/jan/dotfiles/
+        clone: yes
+        update: yes
+    - name: Delete default .bashrc
+      ansible.builtin.file:
+        path: /home/jan/.bashrc
+        state: absent
+    - name: Stow dotfiles
+      ansible.builtin.shell: 
+        cmd: stow .
+      args:
+        chdir: /home/jan/dotfiles/
+
+
+
+
